@@ -2,12 +2,14 @@ import express from 'express';
 import { ConnectectionCheck, ListCharaters, CreateCharater, UpdateCharater } from './db_conn';
 import Joi from 'joi';
 import morgan from 'morgan';
+import cors from "cors";
 
 const app = express();
 const port = 3000;
 
 db();
 
+app.use(cors());
 app.use(morgan('tiny'));
 app.use(express.json());
 

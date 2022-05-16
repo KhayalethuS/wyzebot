@@ -16,9 +16,11 @@ const express_1 = __importDefault(require("express"));
 const db_conn_1 = require("./db_conn");
 const joi_1 = __importDefault(require("joi"));
 const morgan_1 = __importDefault(require("morgan"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const port = 3000;
 db();
+app.use((0, cors_1.default)());
 app.use((0, morgan_1.default)('tiny'));
 app.use(express_1.default.json());
 // App routes
