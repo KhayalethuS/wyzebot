@@ -1,4 +1,4 @@
-# Wyzebot Backi-End
+# Wyzebot Back-End
 
 ## Available Scripts
 
