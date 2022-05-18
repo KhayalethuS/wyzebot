@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateCharater = exports.CreateCharater = exports.ListCharaters = exports.ConnectectionCheck = void 0;
+exports.UpdateCharater = exports.CreateCharater = exports.getCharaters = exports.ListCharaters = exports.ConnectectionCheck = void 0;
 const mongodb_1 = require("mongodb");
 const uri = "mongodb://localhost:27017/Wyzebot";
 function ConnectectionCheck() {
@@ -53,6 +53,24 @@ function ListCharaters() {
     });
 }
 exports.ListCharaters = ListCharaters;
+function getCharaters(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const client = new mongodb_1.MongoClient(uri);
+        try {
+            yield client.connect();
+            const response = yield client.db('Wyzebot').collection('characters').findOne({ _id: new mongodb_1.ObjectId(id) });
+            return response;
+        }
+        catch (error) {
+            console.log(error);
+            throw error;
+        }
+        finally {
+            yield client.close();
+        }
+    });
+}
+exports.getCharaters = getCharaters;
 function CreateCharater(reqBody) {
     return __awaiter(this, void 0, void 0, function* () {
         const client = new mongodb_1.MongoClient(uri);

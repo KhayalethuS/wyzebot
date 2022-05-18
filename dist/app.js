@@ -29,6 +29,12 @@ app.get('/list-characters', (req, res) => __awaiter(void 0, void 0, void 0, func
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(response));
 }));
+app.get('/characters/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.params.id);
+    const response = yield (0, db_conn_1.getCharaters)(req.params.id);
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(response));
+}));
 app.post('/characters', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const schema = joi_1.default.object({
         name: joi_1.default.string().required(),

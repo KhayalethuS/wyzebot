@@ -42,6 +42,26 @@ export async function ListCharaters() {
     }
 }
 
+export async function getCharaters(id: string) {
+    const client = new MongoClient(uri);
+
+    try {
+
+        await client.connect();
+
+        const response = await client.db('Wyzebot').collection('characters').findOne(
+            {_id: new ObjectId(id)}
+        );
+
+        return response;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    } finally {
+        await client.close();
+    }
+}
+
 export async function CreateCharater(reqBody) {
     const client = new MongoClient(uri);
 

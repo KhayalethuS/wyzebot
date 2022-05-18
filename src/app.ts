@@ -1,5 +1,11 @@
 import express from 'express';
-import { ConnectectionCheck, ListCharaters, CreateCharater, UpdateCharater } from './db_conn';
+import { 
+  ConnectectionCheck,
+  ListCharaters,
+  CreateCharater,
+  UpdateCharater,
+  getCharaters
+} from './db_conn';
 import Joi from 'joi';
 import morgan from 'morgan';
 import cors from "cors";
@@ -16,6 +22,15 @@ app.use(express.json());
 // App routes
 app.get('/list-characters', async (req, res) => {
   const response = await ListCharaters();
+
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(response));
+});
+
+app.get('/characters/:id', async (req, res) => {
+
+  console.log(req.params.id);
+  const response = await getCharaters(req.params.id);
 
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(response));
